@@ -1,0 +1,12 @@
+{
+  "development": {
+    "database": "parkly_app_development",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "database": "parky_app_test",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}
