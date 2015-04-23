@@ -13,9 +13,7 @@ module.exports = function(sequelize, DataTypes) {
     underscored:true,
 
     classMethods: {
-      associate: function(models) {
-        signs.belongsTo(models.locations, { foreignKey: 'location_id' });
-      }
+ 
     }
   });
   return signs;

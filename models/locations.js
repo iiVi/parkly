@@ -4,8 +4,6 @@ module.exports = function(sequelize, DataTypes) {
     borough: DataTypes.STRING,
     on_street: DataTypes.STRING,
     cross_street_one: DataTypes.STRING,
-    cross_one_lat: DataTypes.DECIMAL,
-    cross_one_long: DataTypes.DECIMAL,
     cross_street_two: DataTypes.STRING,
     side_of_street: DataTypes.STRING,
   }, {
@@ -14,7 +12,7 @@ module.exports = function(sequelize, DataTypes) {
 
     classMethods: {
       associate: function(models) {
-        locations.hasMany(models.signs, { foreignKey: 'location_id' });
+        locations.hasMany(models.parking_regulations, { foreignKey: 'location_id' });
       }
     }
   });

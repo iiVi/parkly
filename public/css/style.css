@@ -1,3 +1,34 @@
 #map {
 	height: 380px;
+	width: 70%;
+	margin-right: 30%;
+}
+
+#banner {
+	width: 100%;
+	height: 125px;
+	background-image: url('./parkingTicket.jpeg');
+	background-size: 250px; 
+	text-align: center;
+}
+
+#banner-text {
+	padding-top: 20px;
+}
+
+#input-container {
+	background-color: grey;
+	width: 100%;
+}
+
+#tickets-container {
+	height: 380px;
+	width: 30%;
+	overflow: hidden;
+	overflow-y: scroll;
+}
+
+#topbar {
+	height: 25px;
+	background-color: grey;
 }

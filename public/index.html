@@ -16,21 +16,55 @@
 
 	<link rel="stylesheet" href="../css/style.css">
 	<script src='../js/app.js'></script>
-
 </head>
+
+
 <body>
-	<h2>Parkly App Brough</h2>
+	<div id='topbar'>
+		<input type="text" id='sign-in-username' placeholder='username'>
+		<input type="text" id='sign-in-password' placehodler='password'>
+		<button id='sign-in-button'>Sign In</button>
+		<input type="text" id='sign-up-username' placeholder='pick a username'>
+		<input type="text" id='sign-up-password' placeholder='pick a password'>
+		<button id='sign-up-button'>Create Account</button>	
+	</div>
+	
+	<div id='banner'>
+		<h2 id='banner-text'>Parkly App Brough</h2>
+	</div>
 	<div id="input-container">
+		<select name="borough" id="borough">
+			<option value="blank">-- Select a Borough --</option>
+			<option value="M">Manhattan</option>
+			<option value="B">Bronx</option>
+			<option value="K">Brooklyn</option>
+			<option value="Q">Queens</option>
+			<option value="S">Staten Island</option>
+		</select>
 		<input type="text" id="on-street" placeholder="on street">
+		<button id='get-cross'>Get Cross Streets</button>
 		<select name="cross-street-1" id="cross-street-1">
-			<option value="blank">-- Select an Option --</option>
+			<option value="blank">-- Select a Cross Street --</option>
 		</select>
 		<select name="cross-street-2" id="cross-street-2">
-			<option value="blank">-- Select an Option --</option>
+			<option value="blank">-- Select another Cross Street --</option>
 		</select>
 		<button id="submit-block">Submit</button>
+		<button id='find-tickets'>Find Tickets</button>
 	</div>
 	<div id="map"></div>
+	<ul id='tickets-container'></ul>
  
 </body>
+
+<template id='ticket-template'>
+	<p></p>
+</template>
+	<template id="users-template">
+		<h4>Users</h1>
+		<li class="current-user" data-id ='{{id}}'>{{name}}</li>
+		<li class="create-user">Create User</li>
+		<li class="edit-user">Edit Current User</li>
+	</template>
+
 </html>

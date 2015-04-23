@@ -11,7 +11,7 @@ module.exports = {
     	},
         borough: {
             type: DataTypes.STRING
-        }
+        },
     	sign_sequence: {
     		type: DataTypes.INTEGER
     	},

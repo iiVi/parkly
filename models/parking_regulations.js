@@ -4,7 +4,7 @@ module.exports = function(sequelize, DataTypes) {
     the_geom: DataTypes.TEXT,
     object_id: DataTypes.INTEGER,
     borough: DataTypes.STRING,
-    status_code: DataTypes.TEXT,
+    location_id: DataTypes.TEXT,
     sign_sequence: DataTypes.INTEGER,
     sign_code: DataTypes.STRING,
     curb_distance: DataTypes.INTEGER,
@@ -19,7 +19,9 @@ module.exports = function(sequelize, DataTypes) {
     underscored:true,
 
     classMethods: {
-      
+      associate: function(models) {
+        parking_regulations.belongsTo(models.locations, { foreignKey: 'location_id' });
+      }
     }
   });
   return parking_regulations;

@@ -1,11 +1,12 @@
-var application_root = __dirname,
-	express          = require('express'),
-	bodyParser		 = require('body-parser'),
-	path 			 = require('path'),
-	morgan 			 = require('morgan'),
-	models 	 	 	 = require('./models'),
-	locationRouter   = require('./routers/location_router.js'),
-	regulationsRouter = require('./routers/parking_regulation_router.js');
+var application_root  = __dirname,
+	express           = require('express'),
+	bodyParser		  = require('body-parser'),
+	path 			  = require('path'),
+	morgan 			  = require('morgan'),
+	models 	 	 	  = require('./models'),
+	locationRouter    = require('./routers/location_router.js'),
+	regulationsRouter = require('./routers/parking_regulation_router.js'),
+	streetCodeRouter  = require('./routers/street_codes_router.js');
 
 var app = express();
 
@@ -22,5 +23,6 @@ app.use(express.static('./browser'));
 
 app.use('/locations', locationRouter);
 app.use('/regulations', regulationsRouter);
+app.use('/streetcodes', streetCodeRouter);
 
 module.exports = app;

@@ -9,7 +9,7 @@ module.exports = {
         type: DataTypes.INTEGER
       },
       the_geom: {
-      	type: DataTypes.TEXT
+      	type: DataTypes.ARRAY(DataTypes.TEXT)
       },
       object_id: {
       	type: DataTypes.INTEGER
@@ -17,7 +17,7 @@ module.exports = {
       borough: {
       	type: DataTypes.STRING
       },
-      status_code: {
+      location_id: {
       	type: DataTypes.TEXT
       },
       sign_sequence: {
