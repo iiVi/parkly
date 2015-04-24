@@ -1,13 +1,29 @@
 #map {
 	height: 380px;
-	width: 70%;
-	margin-right: 30%;
+/*	width: 70%;
+	margin-right: 30%;*/
+	width: 100%;
+}
+
+#main-div {
+	height: 380px;
+
 }
 
 #banner {
 	width: 100%;
 	height: 125px;
-	background-image: url('./parkingTicket.jpeg');
+	background-image: url('./signgen_csgnew.jpg');
+	background-repeat: repeat-x, repeat-x;
+	background-size: 250px; 
+	background-position: absolute;
+	text-align: center;
+}
+
+#footer {
+	width: 100%;
+	height: 125px;
+	background-image: url('./signgen_csgnew.jpg');
 	background-size: 250px; 
 	text-align: center;
 }
@@ -24,11 +40,20 @@
 #tickets-container {
 	height: 380px;
 	width: 30%;
+	margin-left: 70%;
 	overflow: hidden;
 	overflow-y: scroll;
+	font-size: 10px;
+	position: absolute;
+	top: 175px;
 }
 
 #topbar {
 	height: 25px;
 	background-color: grey;
 }
+/*
+#title-banner {
+	height: 130px;
+	width: 110px;
+}*/

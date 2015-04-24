@@ -1,41 +1,24 @@
 var map;
 $(function() {
 	console.log('loaded bro');
-
 	$('#input-container').on('click', '#get-cross', getCrossStreets);
 	$('#input-container').on('click', '#submit-block', search);
-// +++++++++    get click on the otion in the drop down to work
 	$('body').on('change', '#cross-street-1', searchCross2);
-
-//why does this only work when it is a global variable???
+	$('#input-container').on('click', '#find-tickets', findStreetCodes);
+	ticTemplate = Handlebars.compile($('#ticket-template').html());
 
 	map = L.map('map', {
       'center': [40.7411, -73.9897],
       'zoom': 15
 	});
-
 	L.tileLayer('https://{s}.tiles.mapbox.com/v4/{mapId}/{z}/{x}/{y}.png?access_token={token}', {
 	    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
 	    mapId: 'iivi.f1e12c0a',
 	    token: 'pk.eyJ1IjoiaWl2aSIsImEiOiJTS25vbUQ4In0.iyDNlR19Josj6y07qF71DA'
 	}).addTo(map);
-
 });
 
-
-/*var addRegsToMap = function (sign) {
-	// can dislplay with regulare marker, but not with custom made l.divIcon for some reason???
-	var newIcon = L.divIcon({
-		className: 'my-div-icon', html: '<p>' + sign.desc + '</p>'
-	});
-	var marker = L.marker([sign.lat, sign.long], {icon: newIcon}).addTo(map);
-	//map.panTo([sign.lat, sign.long]);
-	map.setView(new L.LatLng(sign.lat, sign.long), 17);
-};*/
-
-
 var addRegsToMap = function (sign) {
-	// can dislplay with regulare marker, but not with custom made l.divIcon for some reason???
 	map.setView(new L.LatLng(sign.lat, sign.long), 17);
 	var marker = L.marker([sign.lat, sign.long]).addTo(map);
 	marker.valueOf()._icon.style.color = 'green';
@@ -104,8 +87,37 @@ var findTickets = function (streetCodes) {
 		}).done(function (violations2) {
 			violations.push(violations2);
 			console.log(violations);
+			renderTickets(violations);
 		})
 	});
+};
+
+var renderTickets = function (violations) {
+	var ticketInfo = {};
+	$('#map').css('width', '70%').css('margin-right', '30%');
+	for (var i = 0; i < violations.length; i++) {
+		if(violations[i].length > 0) {
+			for (var j = 0; j < violations[i].length; j++) {
+				var regCode = encodeURI(violations[i][j].violation_code);
+					ticketInfo.house_number = violations[i][j].house_number;
+					ticketInfo.street_name = violations[i][j].street_name;
+					ticketInfo.violation_time = violations[i][j].violation_time;
+					ticketInfo.issue_date = violations[i][j].issue_date;
+				if (regCode == 38) {
+					var regCode = 37 + '-' + 38;
+				}
+				$.ajax({
+					url: 'https://data.cityofnewyork.us/resource/ncbg-6agr.json?code=' + regCode,
+					method: 'get'
+				}).done(function(reg) {
+					ticketInfo.definition = reg[0].definition;
+					ticketInfo.all_other_areas = reg[0].all_other_areas;
+					var ticketListItem = $('<li>').html(ticTemplate(ticketInfo));
+					ticketListItem.appendTo($('#tickets-container'));
+				});
+			}
+		}
+	}
 };
 
 
@@ -214,6 +226,8 @@ var getCrossStreets = function () {
 	.done(renderCrossStreets);
 };
 
+/// ============= Renders the first set of cross streets to the dropdown
+
 var renderCrossStreets = function (locations) {
 	for (var i = 0; i < locations.length; i ++) {
 		var cross1 = locations[i].cross_street_one;
@@ -226,10 +240,7 @@ var renderCrossStreets = function (locations) {
 	$('#input-container').on('change', '#cross-street-1 option', searchCross2);
 };
 
-
 /// ============= Finds the cross streets to populate the second cross street drop down
-
-
 
 var searchCross2 = function () {
 	var borough = $('#borough').val();
@@ -243,6 +254,8 @@ var searchCross2 = function () {
 	})
 	.done(renderCross2);
 };
+
+/// ============= Renders the second set of cross streets to the dropdown
 
 var renderCross2 = function (locations) {
 	var borough = $('#borough').val();

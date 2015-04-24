@@ -28,10 +28,10 @@
 		<input type="text" id='sign-up-password' placeholder='pick a password'>
 		<button id='sign-up-button'>Create Account</button>	
 	</div>
-	
+
 	<div id='banner'>
-		<h2 id='banner-text'>Parkly App Brough</h2>
 	</div>
+
 	<div id="input-container">
 		<select name="borough" id="borough">
 			<option value="blank">-- Select a Borough --</option>
@@ -52,13 +52,18 @@
 		<button id="submit-block">Submit</button>
 		<button id='find-tickets'>Find Tickets</button>
 	</div>
-	<div id="map"></div>
-	<ul id='tickets-container'></ul>
+	<div id='main-div'>
+		<div id="map"></div>
+		<ul id='tickets-container'></ul>	
+	</div>
+	<div id='footer'></div>
  
 </body>
 
 <template id='ticket-template'>
-	<p></p>
+	<p>{{house_number}} {{street_name}}</p>
+	<p>{{violation_time}} {{issue_date}}</p>
+	<p>{{definition}} {{all_other_areas}}</p>
 </template>
 	<template id="users-template">
 		<h4>Users</h1>
